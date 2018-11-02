@@ -1,0 +1,38 @@
+import oktubrefest.*
+
+describe "group of tests" {
+const marcanegra1 = new CervezaNegra (lupulo = 3, pais = "Italia", graduacionReglamentaria = 4)
+const marcanegra2 = new CervezaNegra (lupulo = 3, pais = "Alemania", graduacionReglamentaria = 5)
+const jarra1 = new Jarra (litros = 1, marcaCerveza = marcanegra1)
+const jarra2 = new Jarra (litros = 2, marcaCerveza = marcanegra2)
+const juan = new Aleman (peso = 80, jarrasCompradas = [jarra1, jarra2], leGustaEscucharMusica = true, nivelAguante = 80)
+const carpa1 = new Carpa (limitePersonas = 100, personas = #{}, jarrasCerveza = #{jarra1, jarra2}, tieneBanda = false)
+	test "test1" {
+		assert.equals(4, jarra1.contenidoAlcohol())
+	}
+	test "test2" {
+		assert.equals(14, juan.cantidadDeAlcohol())
+	}
+	test "test3" {
+		assert.that(juan.estaEbria())
+	}
+	test "test4" {
+		assert.notThat(juan.quiereEntrar(carpa1))
+	}
+	test "test5" {
+		assert.notThat(carpa1.puedeEntrar(juan))
+	}
+	test "test6" {
+		assert.notThat(juan.puedeEntrar(carpa1))
+	}
+	test "test7" {
+		carpa1.entra(juan)
+		assert.equals(#{}, carpa1.personas())
+	}
+	test "test8" {
+		assert.equals(0, carpa1.cantidadEbriosEmpedernidos())
+	}
+	test "test9" {
+		assert.notThat(juan.esPatriota())
+	}
+}
